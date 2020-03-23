@@ -18,7 +18,7 @@ It handles all memory management and hardware device interaction, extra function
 
 * ```uname``` - *"unix name"*, displays information about the current kernel. 
   * ``-m`` -> Architecture (for instance: arm)
-  * ``-r`` -> Release information (for instance: 5.14.0-534.21.1.el7.x86_64)
+  * ``-r`` -> Release information (for instance: 5.14.0-534.21.1.el7.x86_64). This information is from ``/proc/version``
   * ``-a`` -> All information about the kernel information
   * **THEY CAN BE COMBINED**
 
@@ -54,10 +54,19 @@ Hardware information is represented in the pseudo file system ``/dev``, all devi
 
 * ``lspci`` - *"list pci"*, displays a list of PCI devices attached.
   * ``-k`` -> components of the hardware used by the kernel and modules.
-  * ``-v`` -> verbose, all the possible information 
+  * ``-v`` -> verbose, all the possible information .
+  * ``nn`` -> displays also *Class, VendorID, DeviceID*
 * ``lsusb`` - *"list usb"*, displays a list of USB devices attached.
   * ``-k`` -> further information.
-  * ``-t`` -> more information of the devies connected to a particular port.
-* ``lscpu`` - *"list cpu"*, displays all information a process can need about the CPU.
+  * ``-t`` -> tree view of the devices connected to a particular port.
+* ``lscpu`` - *"list cpu"*, displays all information a process can need about the CPU. Reads the information from ``/proc/cpuinfo``
 * ``lsblk`` - *"list block"*, display in *TREE* view all the block device attached to the system, including their partitions: *NAME, SIZES, MOUNTPOINTs*
   * ``-f`` -> shows the FSTYPE, LABEL, UUID, MOUNTPOINT
+
+### Other commands
+
+* ``dmesg`` *"diagnostic message"*, prints the message buffer of the kernel. The output of this command typically contains the messages produced by the device drivers. Equivalent to ``journalctl -ke``.
+  * ``-T`` -> Time in human format.
+  * ``-d`` -> delta: time in delta format (difference).
+  * ``-W`` -> shows messages in real time like ``journalctl -f`` *(kind of tailf)*.
+* ``dmidecode -t [bios|system|processor|memory|...]`` : Display all information offered by BIOS/UEFI. Programs like ``hshw`` uses this command.
