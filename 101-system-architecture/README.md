@@ -4,4 +4,5 @@
    1. [Pseudo file systems](determine-configure-hardware.md#pseudo-file-systems)
    2. [Kernel](determine-configure-hardware.md#kernel)
       1. [Modules](determine-configure-hardware.md#modules)
-   3. [Hardware](determine-configure-hardware.md#hardware) 
+   3. [Hardware](determine-configure-hardware.md#hardware)
+2. [Boot the system](boot-system.md)
