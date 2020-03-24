@@ -40,3 +40,35 @@ Init scripts in **Debian** based are in ``/etc/initd`` in **RedHat** based in ``
 * ``rc3.d/`` folder with scripts for run level 3, their execution depends on the filename alphabetical order.
 * ``rc.sysinit`` house cleaning before levels
 * ``rc.local`` after a run level has been loaded, tipically for custom processes to be loaded.
+
+## upstart
+
+Upstart is a asyncronous services starter develop for Ubuntu, ported to RedHat/Debian based systems. Faster than init. Real time events, can monitor the services that are woring with it.
+
+``/sbin/init`` fires the ``startup`` event, then The start up event will check and mount the drives that make up the file system using the checks the mounted drives with ``mountall``, additionally it loads the ``/etc/init/rc-sysinit.conf``.
+
+The ``telinit`` command is called switching the default run level by ``runlevel`` command. The runlevel program uses the ``/etc/init/rc.conf`` it will load sequentially.
+
+## systemd
+
+systemd is a services starter, uses C compiled code instead of shell scripts. It is compatible with older System V init scripts.
+
+* ``/usr/lib/systemd/system`` -> provided package installations
+* ``/etc/systemd/system`` -> Unit file location for administrators (takes precedence over ``/usr/lib/systemd``)
+* ``/run/systemd/system`` -> Runtime unit files
+
+### systemd commands
+
+* ``systemctl list-unit-files`` list **ALL** unit files on the system
+* ``systemclt cat <topic.unit>`` displais the file of some unit topic.
+
+```(bash)
+[Unit]
+Description=Multi-User System
+Documentation=man:systemd.special(7)
+Requires=basic.target
+Conflicts=rescue.service rescue.target
+After=basic.target rescue.service rescue.target
+```
+
+``/sbin/init`` exists for compatibility reasons but it is a symbolic link to ``../lib/systemd/systemd``
